@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动</title>
+	<style type="text/css">
+		*{margin:0px;padding:0px;list-style:none;}
+		#div1{/*border:3px solid #f00;*/position:relative;height:100px;width:942px;margin:50px auto;overflow: hidden;}
+		ul{position:absolute;/*width:1884px;left:-942px;*/}
+		li{float:left;margin-right:10px;}
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+         var div1=document.getElementById("div1");
+         var ul=document.getElementsByTagName("ul")[0];
+         var lis=document.getElementsByTagName("li");
+         ul.innerHTML+=ul.innerHTML;
+         // setInterval(function(){
+         //    if(ul.offsetLeft>0){
+         // 		ul.style.left="-942px";
+         // 	}else{
+         //   ul.style.left=ul.offsetLeft+5+"px";
+         // 	}
+         // },30)
+		ul.style.width=(lis[0].offsetWidth+10)*lis.length+"px";
+		ul.style.left=-ul.offsetWidth/2+"px";
+		var timer=null;
+		var speed=4;
+		timer=setInterval(function(){
+			if(ul.offsetLeft>0){
+				ul.style.left=-ul.offsetWidth/2+"px";
+			}
+			if(ul.offsetLeft<-ul.offsetWidth/2){
+				ul.style.left="0"
+			}
+				ul.style.left=ul.offsetLeft+speed+"px";
+		},30)
+		div1.onmouseover=function(){
+			clearInterval(timer)
+		};
+		div1.onmouseout=function(){
+		timer=setInterval(function(){
+			if(ul.offsetLeft>0){
+				ul.style.left=-ul.offsetWidth/2+"px";
+			}
+			if(ul.offsetLeft<-ul.offsetWidth/2){
+				ul.style.left="0"
+			}
+				ul.style.left=ul.offsetLeft+speed+"px";
+		},30)	
+		}
+		document.getElementsByTagName("a")[0].onclick=function(){speed=-4}
+		document.getElementsByTagName("a")[1].onclick=function(){speed=4}
+		}
+	</script>
+</head>
+<body>
+<a href="javascript:;">向左</a>
+<a href="javascript:;">向右</a>
+	<div id="div1">
+		<ul>
+			<li><img src="images/jjx1.jpg"></li>
+			<li><img src="images/jjx2.jpg"></li>
+			<li><img src="images/jjx3.jpg"></li>
+			<li><img src="images/jjx4.jpg"></li>
+			<li><img src="images/jjx5.jpg"></li>
+			<li><img src="images/jjx6.jpg"></li>
+		  
+		</ul>
+	</div>
+</body>
+</html>
